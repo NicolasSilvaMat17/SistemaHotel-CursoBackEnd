@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SistemaHotel.Model.Classes.Entidades;
+using System;
 
 namespace SistemaHotel.Model.Classes.Contextos
 {
@@ -11,21 +12,7 @@ namespace SistemaHotel.Model.Classes.Contextos
         // Métodos
         protected override void OnConfiguring(DbContextOptionsBuilder opcoesDeConstrucao)
         {
-            string hostname = "dpg-daoqgcek1f9s738c5ggg-a.oregon-postgres.render.com";
-            string porta = "5432";
-            string nome_do_banco_de_dados = "dbdevback";
-            string nome_do_usuario = "dbdevback_user";
-            string senha = "yr1mCRnEy4ep7pbhsH5KDRTe4EENsvD8";
-
-            string string_de_conexao = $"" +
-                $"Host={hostname};" +
-                $"Port={porta};" +
-                $"Database={nome_do_banco_de_dados};" +
-                $"Username={nome_do_usuario};" +
-                $"Password={senha};" +
-                $"SSL Mode=Require;" +
-                $"Trust Server Certificate=true;";
-
+            string string_de_conexao = Environment.GetEnvironmentVariable("db2");
             opcoesDeConstrucao.UseNpgsql(string_de_conexao);
         }
 
